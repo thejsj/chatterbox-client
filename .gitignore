@@ -47,4 +47,4 @@ node_modules
 
 ## API keys
 client/env/config.js
-client/env/config.jsson
+client/env/config.json
