@@ -1,5 +1,3 @@
-var Backbone = require('backbone');
-
 var Models = {};
 
 Models.User = Backbone.Model.extend({
@@ -11,8 +9,16 @@ Models.User = Backbone.Model.extend({
   }
 });
 
+Models.Message = Backbone.Model.extend({
+
+});
+
+
 try {
   if (module !== undefined && module.exports !== undefined) {
     module.exports = Models;
   }
 } catch(err) {}
+
+
+

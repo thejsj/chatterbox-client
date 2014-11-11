@@ -12,12 +12,21 @@
     <script src="bower_components/backbone/backbone.js"></script>
     <!-- your scripts -->
     <script src="env/config.js"></script>
+    <script src="scripts/models.js"></script>
+    <script src="scripts/collection.js"></script>
     <script src="scripts/app.js"></script>
   </head>
   <body>
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      <ul id='roomSelect'></ul>
+      <ul id='chats'></ul>
     </div>
+
+    <!-- Templates -->
+    <script type="text/template" id='single-message-template'>
+      <li class='message'><span class='username'><% username %></span><p> class='text'><% text %></p></li>
+    </script>
   </body>
 </html>
