@@ -9,7 +9,7 @@ Models.User = Backbone.Model.extend({
     'friends' : null
   },
   initialize: function(params){
-    this.set('friends', new Collection.Friends())
+    this.set('friends', new Collection.Friends());
   },
   addFriend: function(user){
     // Find user by user name, from the global _users
@@ -35,11 +35,20 @@ Models.User = Backbone.Model.extend({
     this.get('friends').remove(user);
     return true;
   }
-
 });
 
 Models.Message = Backbone.Model.extend({
-
+  url: function () {
+    return app.server + '1/classes/chatterbox/';
+  },
+  parse: function (response) {
+    return response;
+  },
+  initialize: function () {
+    // Push message to Parse.com
+    this.id = this.get('objectId');
+    this.set('id', this.get('objectId'));
+  },
 });
 
 
