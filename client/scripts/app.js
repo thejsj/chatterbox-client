@@ -22,7 +22,7 @@ var app = {
     });
   },
   _parseData: function(data){
-    console.log(this);
+    window.data = data;
     //get all room names
     var roomNames = _.uniq(_.map(data.results, function(result){
       return result.roomname;

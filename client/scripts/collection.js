@@ -1,6 +1,5 @@
 var Collection = {};
 
-
 Collection.Room = Backbone.Collection.extend({
   model : Models.Message
 });
