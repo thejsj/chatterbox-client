@@ -57,11 +57,10 @@ Views.SingleRoomView = Backbone.View.extend({
     this.model.get('collection').on('all', this.renderMessages.bind(this));
   },
   renderMessages: function () {
-    console.log('--------Render Messages ---------');
+    console.log('renderMessages');
     var $messages = this.$el.find('.messages');
     $messages.html('');
     var messages = this.model.get('collection').sortBy(function (m) {
-      console.log(m);
       return m.get('createdAt');
     });
     messages.forEach(function (message) {
@@ -72,7 +71,7 @@ Views.SingleRoomView = Backbone.View.extend({
     }, this);
   },
   render: function () {
-    console.log('Render: ' + this.model.get('collection').length);
+    console.log('render');
     this.$el.html(this.template(this.model.attributes));
     this.renderMessages();
   },
@@ -93,7 +92,6 @@ Views.SingleRoomView = Backbone.View.extend({
   },
   submitForm: function (event) {
     if (event.keyCode === 13) {
-      console.log('Submit Form');
       this.$('#message-submission').submit();
     }
   }
