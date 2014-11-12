@@ -8,90 +8,88 @@ Views.RoomListSingleView = Backbone.View.extend({
   events: {
     'click': 'changeView',
   },
-  initialize: function(params) {
-    this.model = params.model;
-  },
-  render: function() {
-    this.el = this.template({
-      name: this.model.name
-    });
+  render: function () {
+    this.el = this.template(this.model.attributes);
     this.$el = $(this.el);
     this.delegateEvents();
     return this.$el;
   },
-  changeView: function() {
-    app._current_room = new Views.SingleRoomView({
+  changeView: function () {
+    window.app.currentRoom = new Views.SingleRoomView({
       model: this.model
     });
   }
 });
+
 // This has no template
 // It just renders all the SingleRoomViews into a div
 Views.RoomListView = Backbone.View.extend({
-  el: '#roomSelect',
   tagName: 'div',
   className: 'room-select',
   template: _.template($("#rooms-view").html()),
-  initialize: function(params) {
-    this.collection = params.collection;
+  initialize: function () {
+    this.collection.on('all', this.render, this);
   },
-  render: function() {
+  render: function () {
     this.$el.html(this.template());
     // Go through each model and append its HTML into the div
-    _.each(this.collection, function(room) {
+    this.collection.forEach(function (room) {
       var view = new Views.RoomListSingleView({
         model: room
       });
-      this.$el.find('.rooms').append(view.render());
-    }.bind(this));
+      this.$('.rooms').append(view.render());
+    }, this);
   }
 });
+
+
 Views.SingleRoomView = Backbone.View.extend({
   tagName: 'div',
-  el: '#single-room-container',
   className: 'single-room',
+  el: '#single-room-container',
   template: _.template($("#single-room-view").html()),
   events: {
     'submit #message-submission': 'addMessage'
   },
-  initialize: function() {
+  initialize: function () {
     this.render();
+    this.model.on('change', this.render, this);
+    this.model.collection.on('all', this.render, this);
   },
-  render: function() {
-    this.$el.html(this.template({
-      name: this.model.name
-    }));
-    _.each(this.model.models, function(message) {
+  render: function () {
+    console.log('Render View');
+    this.$el.html(this.template(this.model.attributes));
+    this.model.get('collection').forEach(function (message) {
+      console.log(message);
       var view = new Views.MessageView({
         model: message
       });
       this.$el.find('.messages').prepend(view.render());
-    }.bind(this));
+    }, this);
   },
-  addMessage: function(event) {
+  addMessage: function (event) {
     event.preventDefault();
     var $textarea = this.$el.find('#message-submission textarea');
     var text = $textarea.val();
     $textarea.val('');
-    if(typeof text === 'string' && text.length > 0) {
-      var message = new Models.Message({
+    if (typeof text === 'string' && text.length > 0) {
+      this.model.get('collection').create({
         text: text,
-        roomname: this.model.name,
-        username: app.username
+        roomname: this.model.get('name'),
+        username: window.app.username
       });
-      console.log('text');
-      console.log(message.get('text'));
-      message.publish();
-      this.model.add(message);
-      this.render();
     }
     event.stopPropagation();
   }
 });
+
 Views.MessageView = Backbone.View.extend({
   tagName: 'div',
   template: _.template($('#single-message-view').html()),
-  render: function() {
-    return this.template(this.model.toJSON());
+  render: function () {
+    this.el = this.template(this.model.attributes);
+    this.$el = $(this.el);
+    this.delegateEvents();
+    return this.$el;
   }
 });

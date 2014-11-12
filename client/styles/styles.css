@@ -42,6 +42,17 @@ body {
     background: #fff;
     margin: 0;
     padding: 0; }
+    #main #chats .message {
+      padding: 10px; }
+      #main #chats .message .username {
+        font-size: 10px;
+        margin-bottom: 5px; }
+      #main #chats .message p.text {
+        padding: 0;
+        margin: 0;
+        min-height: 12px; }
+      #main #chats .message:nth-child(2n+1) {
+        background-color: #f7f7f7; }
   #main h1 {
     margin-top: 0;
     font-size: 35px;
