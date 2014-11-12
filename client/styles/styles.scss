@@ -1,5 +1,18 @@
+$light-blue: #82D8E5;
+$green: #9ACCB3;
+$turquoise: #69BAB3;
+$dark-brown: #243757;
+$gray-blue: #3A5F6F;
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-    background: #eee;
+    background: $green;
     text-align: center;
     font-family: arial, sans-serif;
     padding: 0;
@@ -8,25 +21,51 @@ body {
 
 #main {
 
+    #message-submission  {
+        width: 100%;
+        padding: 20px 10px;
+        margin: 0;
+        input[type='text']  {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: solid 1px $turquoise;
+        }
+    }
+
     #roomSelect {
         float: left;
         width: 30%;
         max-width: 300px;
-        background-color: #f7f7f7;
+        background-color: $turquoise;
         padding: 0;
         margin: 0;
+
+        h1 {
+            font-family: 'Montserrat', Montserrat;
+            font-weight: bold;
+            color: white;
+            font-size: 1.5em;
+            padding: 8px;
+            margin: 0;
+            margin-top: 15px;
+        }
+
         .rooms {
             padding: 0;
             margin: 0;
         }
         li  {
             list-style-type: none;
+            font-family: 'Montserrat', Montserrat;
             cursor: pointer;
-            height: 30px;
+            min-height: 30px;
             color: white;
-            background: #112299;
             margin: 0;
-            border-bottom: solid 1px #332299;
+            border-top: solid 1px darken($turquoise, 20);
+            &:last-child {
+                border-bottom: solid 1px darken($turquoise, 20);
+            }
             p {
                 padding: 8px;
                 margin: 0;
@@ -38,15 +77,43 @@ body {
         width: 69.99%;
         float: right;
         max-width: 700px;
-        min-height: 400px;
+        min-height: 200px;
         background: #fff;
         margin: 0;
         padding: 0;
+        margin-bottom: 100px;
+
+        .initial-message {
+            text-transform: uppercase;
+            color: #ccc;
+            text-align: center;
+            padding: 60px 0;
+            font-family: 'Montserrat', Montserrat;
+            font-size: 1.25em;
+        }
+
+        h3.name {
+            color: $gray-blue;
+            font-family: 'Montserrat', Montserrat;
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            padding: 0px 10px;
+            margin: 40px 0 0 0;
+            font-size: 1.75em;
+        }
+
         .message {
             padding: 10px;
+            border-top: solid 1px $green;
+            &:last-child {
+                border-bottom: solid 1px $green;
+            }
             .username {
                 font-size: 10px;
                 margin-bottom: 5px;
+                font-family: 'Montserrat', Montserrat;
+                font-weight: bold;
+                color: $gray-blue;
             }
             p.text {
                 padding: 0;
@@ -54,7 +121,7 @@ body {
                 min-height: 12px;
             }
             &:nth-child(2n+1) {
-                background-color: #f7f7f7;
+                background-color: lighten($turquoise, 40);
             }
         }
     }

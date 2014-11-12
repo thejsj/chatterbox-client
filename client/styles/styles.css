@@ -1,5 +1,11 @@
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
 body {
-  background: #eee;
+  background: #9ACCB3;
   text-align: center;
   font-family: arial, sans-serif;
   padding: 0;
@@ -13,24 +19,43 @@ body {
   padding: 0;
   border: solid #ddd;
   border-width: 0 1px 1px 1px; }
+  #main #message-submission {
+    width: 100%;
+    padding: 20px 10px;
+    margin: 0; }
+    #main #message-submission input[type='text'] {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: solid 1px #69BAB3; }
   #main #roomSelect {
     float: left;
     width: 30%;
     max-width: 300px;
-    background-color: #f7f7f7;
+    background-color: #69BAB3;
     padding: 0;
     margin: 0; }
+    #main #roomSelect h1 {
+      font-family: 'Montserrat', Montserrat;
+      font-weight: bold;
+      color: white;
+      font-size: 1.5em;
+      padding: 8px;
+      margin: 0;
+      margin-top: 15px; }
     #main #roomSelect .rooms {
       padding: 0;
       margin: 0; }
     #main #roomSelect li {
       list-style-type: none;
+      font-family: 'Montserrat', Montserrat;
       cursor: pointer;
-      height: 30px;
+      min-height: 30px;
       color: white;
-      background: #112299;
       margin: 0;
-      border-bottom: solid 1px #332299; }
+      border-top: solid 1px #3c817b; }
+      #main #roomSelect li:last-child {
+        border-bottom: solid 1px #3c817b; }
       #main #roomSelect li p {
         padding: 8px;
         margin: 0; }
@@ -38,21 +63,43 @@ body {
     width: 69.99%;
     float: right;
     max-width: 700px;
-    min-height: 400px;
+    min-height: 200px;
     background: #fff;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+    margin-bottom: 100px; }
+    #main #chats .initial-message {
+      text-transform: uppercase;
+      color: #ccc;
+      text-align: center;
+      padding: 60px 0;
+      font-family: 'Montserrat', Montserrat;
+      font-size: 1.25em; }
+    #main #chats h3.name {
+      color: #3A5F6F;
+      font-family: 'Montserrat', Montserrat;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      padding: 0px 10px;
+      margin: 40px 0 0 0;
+      font-size: 1.75em; }
     #main #chats .message {
-      padding: 10px; }
+      padding: 10px;
+      border-top: solid 1px #9ACCB3; }
+      #main #chats .message:last-child {
+        border-bottom: solid 1px #9ACCB3; }
       #main #chats .message .username {
         font-size: 10px;
-        margin-bottom: 5px; }
+        margin-bottom: 5px;
+        font-family: 'Montserrat', Montserrat;
+        font-weight: bold;
+        color: #3A5F6F; }
       #main #chats .message p.text {
         padding: 0;
         margin: 0;
         min-height: 12px; }
       #main #chats .message:nth-child(2n+1) {
-        background-color: #f7f7f7; }
+        background-color: #f5fafa; }
   #main h1 {
     margin-top: 0;
     font-size: 35px;

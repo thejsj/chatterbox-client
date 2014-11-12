@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>chatterbox</title>
   <link rel="stylesheet" href="styles/styles.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
   <!-- dependencies -->
   <script src="bower_components/jquery/jquery.min.js"></script>
@@ -18,7 +19,9 @@
     <ul id="roomSelect"></ul>
     <!-- Your HTML goes here! -->
     <div id="chats">
-      <div id="single-room-container"></div>
+      <div id="single-room-container">
+        <p class='initial-message'>Don't be shy! Go into a room!</p>
+      </div>
     </div>
     <!-- <h1>chatterbox</h1> -->
   </div>
@@ -47,7 +50,7 @@
   </script>
 
   <script type="text/template" id="rooms-view">
-    <h3>Rooms</h3>
+    <h1>chatterbox</h1>
     <ul class="rooms"></ul>
   </script>
 
@@ -63,8 +66,8 @@
       <%=_.escape(name) %>
     </h3>
     <form id="message-submission">
-      <textarea placeholder='input message'></textarea>
-      <input type="submit"></input>
+      <input type='text' placeholder='Your message...' />
+      <!--<input type="submit"></input>-->
     </form>
     <div class="messages"></div>
   </script>

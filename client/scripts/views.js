@@ -37,7 +37,7 @@ Views.RoomListView = Backbone.View.extend({
       var view = new Views.RoomListSingleView({
         model: room
       });
-      this.$('.rooms').append(view.render());
+      this.$('.rooms').prepend(view.render());
     }, this);
   }
 });
@@ -49,29 +49,39 @@ Views.SingleRoomView = Backbone.View.extend({
   el: '#single-room-container',
   template: _.template($("#single-room-view").html()),
   events: {
-    'submit #message-submission': 'addMessage'
+    'submit #message-submission': 'addMessage',
+    'keypress #message-submission input': 'submitForm'
   },
   initialize: function () {
     this.render();
-    this.model.on('change', this.render, this);
-    this.model.collection.on('all', this.render, this);
+    this.model.get('collection').on('all', this.renderMessages.bind(this));
   },
-  render: function () {
-    console.log('Render View');
-    this.$el.html(this.template(this.model.attributes));
-    this.model.get('collection').forEach(function (message) {
-      console.log(message);
+  renderMessages: function () {
+    console.log('--------Render Messages ---------');
+    var $messages = this.$el.find('.messages');
+    $messages.html('');
+    var messages = this.model.get('collection').sortBy(function (m) {
+      console.log(m);
+      return m.get('createdAt');
+    });
+    messages.forEach(function (message) {
       var view = new Views.MessageView({
         model: message
       });
-      this.$el.find('.messages').prepend(view.render());
+      $messages.prepend(view.render());
     }, this);
   },
+  render: function () {
+    console.log('Render: ' + this.model.get('collection').length);
+    this.$el.html(this.template(this.model.attributes));
+    this.renderMessages();
+  },
   addMessage: function (event) {
+    console.log('addMessage');
     event.preventDefault();
-    var $textarea = this.$el.find('#message-submission textarea');
-    var text = $textarea.val();
-    $textarea.val('');
+    var $input = this.$el.find('#message-submission input');
+    var text = $input.val();
+    $input.val('');
     if (typeof text === 'string' && text.length > 0) {
       this.model.get('collection').create({
         text: text,
@@ -80,6 +90,12 @@ Views.SingleRoomView = Backbone.View.extend({
       });
     }
     event.stopPropagation();
+  },
+  submitForm: function (event) {
+    if (event.keyCode === 13) {
+      console.log('Submit Form');
+      this.$('#message-submission').submit();
+    }
   }
 });
 
